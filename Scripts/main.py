@@ -1,8 +1,6 @@
 import pygame, random
+import worldClass
 pygame.init()
-
-import matplotlib.pyplot as plt
-from perlin_noise import PerlinNoise
 
 #Variables
 simSize = (60,60)
@@ -15,23 +13,18 @@ worldSeed = 0
 window = pygame.display.set_mode((simSize[0] * 8, simSize[1] * 8))
 pygame.display.set_caption("Weird Survival Game")
 
-
-simGrid[58][58] = 1
-#simGrid[1][59] = 1
-
-#Functions
-def GenWorld():
-  for y in range(0, 60):
-    for x in range(0, 60):
-      simGrid[x][y] = random.randint(0,1)
-
+#World Functions
 def DrawWorld(m):
   for y in range(0, 60):
     for x in range(0, 60):
-      pygame.draw.rect(window, simColours[simGrid[x][y]], ((x * 8), (y * 8), 8, 8))
+      pygame.draw.rect(window, simColours[m[x][y]], ((x * 8), m(y * 8), 8, 8))
 
-GenWorld()
-DrawWorld(simGrid)
+world = worldClass.worldMap(60)
+
+#print(world.name)
+world.genMap()
+
+DrawWorld(world.mapArray)
 
 #Main loop
 running = True
