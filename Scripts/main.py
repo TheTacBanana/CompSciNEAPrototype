@@ -17,11 +17,13 @@ def DrawWorld(m):
       tileType = 0
       value = m[x][y]
 
-      if value < 0.7:
+      if value < 0.5:
         tileType = 0
       else:
         tileType = 1
-      pygame.draw.rect(window, (255 * value, 255 * value, 255 * value), ((x * 8), (simSize[1] * 8) - (y * 8) - 8, 8, 8))
+      #simColours[tileType]
+      #255 * value, 255 * value, 255 * value
+      pygame.draw.rect(window, (simColours[tileType]), ((x * 8), (simSize[1] * 8) - (y * 8) - 8, 8, 8))
 
 world = worldClass.worldMap(60)
 world.genMap(69)

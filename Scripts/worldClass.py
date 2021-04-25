@@ -31,9 +31,38 @@ class worldMap():
             for x in range(0, self.arraySize):
                 self.mapArray[x][y] = round(random.random(),2)
 
-        self.smoothGen
+        self.smoothGen()
 
     def smoothGen(self):
+        dupMap = self.mapArray
+        for y in range(0, self.arraySize):
+            for x in range(0, self.arraySize):
+                count = 0
+                total = 0
+                if x != 0 and y != 0:
+                    total += dupMap[x - 1][y - 1]
+                    count += 1
+                if x != 0 and y != self.arraySize - 1:
+                    total += dupMap[x - 1][y + 1]
+                    count += 1
+                if x != self.arraySize - 1 and y != self.arraySize - 1:
+                    total += dupMap[x + 1][y + 1]
+                    count += 1
+                if x != self.arraySize - 1 and y != 0:
+                    total += dupMap[x + 1][y - 1]
+                    count += 1
+                if x != 0:
+                    total += dupMap[x - 1][y]
+                    count += 1
+                if y != 0:
+                    total += dupMap[x][y - 1]
+                    count += 1
+                if x != self.arraySize - 1:
+                    total += dupMap[x + 1][y]
+                    count += 1
+                if y != self.arraySize - 1:
+                    total += dupMap[x][y + 1]
+                    count += 1
 
-                
-                
+                dupMap[x][y] = total / count
+        self.mapArray = dupMap
