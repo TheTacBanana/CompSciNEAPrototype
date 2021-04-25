@@ -33,6 +33,9 @@ class worldMap():
 
         self.smoothGen()
         self.smoothGen()
+        self.smoothGen()
+        self.smoothGen()
+        self.smoothGen()
 
     def smoothGen(self):
         dupMap = self.mapArray
@@ -73,7 +76,7 @@ class worldMap():
                 elif (down > up) and (down > neutral): # Down
                     value = -0.08 * down
                 else: # Neutral
-                    value += 0
+                    value = 0
 
                 dupMap[x][y] += value
                 dupMap[x][y] = self.clamp(dupMap[x][y], 0, 1)

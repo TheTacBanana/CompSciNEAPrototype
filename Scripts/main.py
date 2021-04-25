@@ -5,6 +5,7 @@ pygame.init()
 #Variables
 simSize = 240
 gridSize = 4
+
 simColours = {0: (26, 148, 49), 1: (8, 96, 168)}
 agentLocation = (0,0)
 
