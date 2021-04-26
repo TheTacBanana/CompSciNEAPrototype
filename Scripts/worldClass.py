@@ -7,6 +7,7 @@ class worldMap():
         self.typeArray = [[(0, 0, 0) for i in range(size)] for j in range(size)]
 
         self.inverted = False
+        self.grayscale = False
         self.upNeutralDown = 0
         self.averaging = 0
         self.params = []
@@ -26,6 +27,9 @@ class worldMap():
                 self.upNeutralDown = self.params[key]
             elif key == "Averaging":
                 self.averaging = self.params[key]
+            elif key == "Grayscale":
+                if self.params[key] == 1:
+                    self.grayscale = True
             else:
                 self.thresholds.append((float(key),(self.params[key][0], self.params[key][1], self.params[key][2])))
 
