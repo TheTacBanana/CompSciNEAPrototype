@@ -1,4 +1,5 @@
 import pygame, random, json
+from datetime import datetime
 import worldClass
 pygame.init()
 
@@ -6,9 +7,6 @@ pygame.init()
 simSize = 256
 gridSize = 2
 simSeed = 420
-
-simColours = {0: (8, 96, 168), 1: (245, 234, 146), 2: (26, 148, 49), 3: (136, 140, 141), 4: (96, 103, 107), 5: (255, 250, 250)}
-agentLocation = (0,0)
 
 window = pygame.display.set_mode((simSize * gridSize, simSize * gridSize))
 window2 = pygame.display.set_mode((simSize * gridSize, simSize * gridSize))
@@ -28,11 +26,18 @@ def DrawWorld(m):
         pygame.draw.rect(window2, (255 * value, 255 * value, 255 * value), ((x * gridSize), (y * gridSize) - gridSize, gridSize, gridSize))
 
 def RandomWorld():
+  print(datetime.now())
   world.genMap(random.randint(0, 10000))
+  DrawWorld(world.heightArray)
+  print(datetime.now())
+
+def SetWorld(seed):
+  world.genMap(seed)
   DrawWorld(world.heightArray)
 
 #Setup
 world = worldClass.worldMap(simSize)
+SetWorld(420)
 
 #Main loop
 running = True
