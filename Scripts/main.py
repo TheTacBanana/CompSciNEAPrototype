@@ -3,13 +3,14 @@ import worldClass
 pygame.init()
 
 #Variables
-simSize = 240
-gridSize = 4
+simSize = 256
+gridSize = 1
 
-simColours = {0: (26, 148, 49), 1: (8, 96, 168)}
+simColours = {0: (8, 96, 168), 1: (245, 234, 146),2: (26, 148, 49)}
 agentLocation = (0,0)
 
 window = pygame.display.set_mode((simSize * gridSize, simSize * gridSize))
+window2 = pygame.display.set_mode((simSize * gridSize, simSize * gridSize))
 pygame.display.set_caption("Weird Survival Game")
 
 #World Functions
@@ -18,17 +19,21 @@ def DrawWorld(m):
     for x in range(0, simSize):
       tileType = 0
       value = m[x][y]
+      value = 1 - value
 
-      if value < 0.05:
-        tileType = 1
+      if value < 0.015:
+        colour = simColours[0]
+      elif value < 0.05:
+        colour = simColours[1]
       else:
-        tileType = 0
+        colour = simColours[2]
       #simColours[tileType]
       #255 * value, 255 * value, 255 * value
-      pygame.draw.rect(window, (simColours[tileType]), ((x * gridSize), (simSize * gridSize) - (y * gridSize) - gridSize, gridSize, gridSize))
+      pygame.draw.rect(window2, (colour), ((x * gridSize), (simSize * gridSize) - (y * gridSize) - gridSize, gridSize, gridSize))
+      #pygame.display.update()
 
 world = worldClass.worldMap(simSize)
-world.genMap(100)
+world.genMap(104)
 
 #print(world.mapArray)
 DrawWorld(world.mapArray)

@@ -5,7 +5,7 @@ class worldMap():
         self.arraySize = size
         self.mapArray = [[-1 for i in range(size)] for j in range(size)]
 
-    def fuckingShittyDepreciatedRecurssion(self, x, y):
+    def fuckingShittyDepreciatedRecursion(self, x, y):
         if y == self.arraySize:
             return
         if x == 0:
@@ -31,13 +31,19 @@ class worldMap():
             for x in range(0, self.arraySize):
                 self.mapArray[x][y] = round(random.random(),2)
 
+        self.upNeutralDown()
+        self.upNeutralDown()
+        self.upNeutralDown()
+        self.upNeutralDown()
+
+        self.smoothGen()
         self.smoothGen()
         self.smoothGen()
         self.smoothGen()
         self.smoothGen()
         self.smoothGen()
 
-    def smoothGen(self):
+    def upNeutralDown(self):
         dupMap = self.mapArray
         for y in range(0, self.arraySize):
             for x in range(0, self.arraySize):
@@ -81,6 +87,40 @@ class worldMap():
                 dupMap[x][y] += value
                 dupMap[x][y] = self.clamp(dupMap[x][y], 0, 1)
 
+        self.mapArray = dupMap
+
+    def smoothGen(self):
+        dupMap = self.mapArray
+        for y in range(0, self.arraySize):
+            for x in range(0, self.arraySize):        
+                total = 0
+                count = 0
+                if x != 0 and y != 0:
+                    total += self.mapArray[x - 1][y - 1]
+                    count += 1
+                if x != 0 and y != self.arraySize - 1:
+                    total += self.mapArray[x - 1][y + 1]
+                    count += 1
+                if x != self.arraySize - 1 and y != self.arraySize - 1:
+                    total += self.mapArray[x + 1][y + 1]
+                    count += 1
+                if x != self.arraySize - 1 and y != 0:
+                    total += self.mapArray[x + 1][y - 1]
+                    count += 1
+                if x != 0:
+                    total += self.mapArray[x - 1][y]
+                    count += 1
+                if y != 0:
+                    total += self.mapArray[x][y - 1]
+                    count += 1
+                if x != self.arraySize - 1:
+                    total += self.mapArray[x + 1][y]
+                    count += 1
+                if y != self.arraySize - 1:
+                    total += self.mapArray[x][y + 1]
+                    count += 1
+
+                dupMap[x][y] = total / count
         self.mapArray = dupMap
 
     def clamp(self, val, low, high):
