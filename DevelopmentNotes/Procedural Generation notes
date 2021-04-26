@@ -1,3 +1,4 @@
+Initial Development:
 Created a world class
 Started with random grid of numbers
 Displayed it as a grayscale image
@@ -12,3 +13,16 @@ This worked so much better and produced a convincing heightmap and colour map
 Spent time tweaking values for the colour map, this took time but turned out well in the end
 Added a screenshot function, so i can easily take screenshots for the writeup
 Theres definitely still more things which could be tweaked
+
+Early Optimzation Thoughts:
+Currently takes 1.3~ seconds to generate the height and colour matrix for a 256x256 map
+Only 0.04~ seconds to actually render to the window
+With that render time i could refresh 25 times a second
+Though with the overhead from querying a neural network, that might be reduced to 15~ times a second or less
+Which is still pretty good, alot of the time on my project will be taken up by compute time, so optimising things as much as i can will pay off in the end
+I could possibly make the generation and smoothing multithreaded, say, splitting the map into 4 sections and having 1 thread deal with each
+I could run into problems with that though
+I dont think i could optimise drawing to the window at all, because that is built off pygame
+The actual generation wont happen that often, only when a new agent gets created will the 1.3 delay happen
+Though that delay will be increased in the future, i still have to place trees, and a few other things, like berry bushes for the agent to feed off of
+That will take another algorithm, not sure what though yet
