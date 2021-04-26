@@ -1,0 +1,14 @@
+Created a world class
+Started with random grid of numbers
+Displayed it as a grayscale image
+Tried to implement a recursive function to smooth out the random generation
+It would round the heights to within 0.1 of the heights surrounding it
+This didnt work at all
+Then worked on an averaging function which worked better, but didnt get the final result
+Then implemented the upneutraldown function
+Running these only once worked okayish, but didnt work fully
+Upon second thought i ran them multiple times, defined in the parameters json file
+This worked so much better and produced a convincing heightmap and colour map
+Spent time tweaking values for the colour map, this took time but turned out well in the end
+Added a screenshot function, so i can easily take screenshots for the writeup
+Theres definitely still more things which could be tweaked
