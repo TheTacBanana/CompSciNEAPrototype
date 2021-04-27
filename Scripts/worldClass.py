@@ -4,7 +4,8 @@ class worldMap():
     def __init__(self, size):
         self.arraySize = size
         self.heightArray = [[-1 for i in range(size)] for j in range(size)]
-        self.typeArray = [[(0, 0, 0) for i in range(size)] for j in range(size)]
+        self.colourArray = [[(0, 0, 0) for i in range(size)] for j in range(size)]
+        self.typeArray = [[-1 for i in range(size)] for j in range(size)]
 
         self.inverted = False
         self.grayscale = False
@@ -42,7 +43,8 @@ class worldMap():
                         value = 1 - value
                     if value <= self.thresholds[i][0]:
                         #print(thresholds[i][0])
-                        self.typeArray[x][y] = self.thresholds[i][1]
+                        self.colourArray[x][y] = self.thresholds[i][1]
+                        self.typeArray[x][y] = i
                         break
             
 
