@@ -44,14 +44,11 @@ RandomWorld()
 #SetWorld(420)
 agent.updateSurroundings(world.typeArray)
 
-matrix = mathLib.Matrix(2, 1, [[9,9],[3,3]])
-matrix2 = mathLib.Matrix(2, 1, [[9,9],[3,3]])
-print(matrix)
-print(matrix2)
-matrix3 = mathLib.add(matrix, matrix2)
+matrix = mathLib.Matrix(2, 2, [[1,2], [3,4]])
 print(matrix.val())
-print(matrix2.val())
+matrix3 = mathLib.matrixMultiply(matrix, matrix)
 print(matrix3.val())
+
 
 #Main loop
 running = True

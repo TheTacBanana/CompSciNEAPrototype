@@ -9,15 +9,15 @@ class Matrix():
         return self.matrixArr
 
     def dimensions(self):
-        return [len(self.matrixArr), len(self.matrixArr[0])]
+        return [len(self.matrixArr), len(self.matrixArr[0])] # rows - columns
 
     def scalarMultiply(self, multiplier):
         for y in range(0, len(self.matrixArr)):
             for x in range(0, len(self.matrixArr[0])):
-                self.matrixArr[x][y] = self.matrixArr[x][y] * multiplier
+                self.matrixArr[y][x] = self.matrixArr[y][x] * multiplier
 
 # Basic Matrix Operations
-def add(m1, m2):
+def matrixAdd(m1, m2):
     if m1.dimensions()[0] != m2.dimensions()[0]:
         raise Exception("Matrices Row Order does not match")
     elif m1.dimensions()[1] != m2.dimensions()[1]:
@@ -26,8 +26,22 @@ def add(m1, m2):
         newMat = Matrix(m1.dimensions()[0], m1.dimensions()[1])
         for y in range(0, m1.dimensions()[0]):
             for x in range(0, m1.dimensions()[1]):
-                newMat.matrixArr[x][y] = m1.val()[x][y] + m2.val()[x][y]
+                newMat.matrixArr[y][x] = m1.val()[y][x] + m2.val()[y][x]
         return newMat
 
-def multiply(m1, m2):
-    pass
+def matrixMultiply(m1, m2):
+    if m1.dimensions()[1] != m2.dimensions()[0]:
+        raise Exception("Matrices Multiplication Error")
+    else:
+        newMat = Matrix(m1.dimensions()[0], m2.dimensions()[1])
+        for row in range(0, m1.dimensions()[1]):
+            subRow = m1.val()[row][0:m1.dimensions()[1]]
+            for col in range(0, m2.dimensions()[0]):
+                subCol = []
+                for i in range(0, m1.dimensions()[0]):
+                    subCol.append(m2.val()[i][col])
+                total = 0
+                for x in range(0, len(subRow)):
+                    total += subRow[x] * subCol[x]
+                newMat.matrixArr[row][col] = total
+        return newMat
