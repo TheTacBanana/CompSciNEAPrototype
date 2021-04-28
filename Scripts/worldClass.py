@@ -1,6 +1,6 @@
 import random, json
 
-class worldMap():
+class WorldMap():
     def __init__(self, size):
         self.arraySize = size
         self.heightArray = [[-1 for i in range(size)] for j in range(size)]
@@ -15,7 +15,7 @@ class worldMap():
         self.thresholds = []
         self.loadParameters("DefaultParameters.json")
 
-    def loadParameters(self, fname):
+    def LoadParameters(self, fname):
         file = open("Presets\\{}".format(fname), "r")
         self.params = json.loads(file.read())
         file.close()
@@ -34,7 +34,7 @@ class worldMap():
             else:
                 self.thresholds.append((float(key),(self.params[key][0], self.params[key][1], self.params[key][2])))
 
-    def convertTypes(self):
+    def ConvertTypes(self):
         for y in range(0, self.arraySize):
             for x in range(0, self.arraySize):
                 for i in range(len(self.thresholds)):
@@ -48,7 +48,7 @@ class worldMap():
                         break
             
 
-    def genMap(self, seed):
+    def GenMap(self, seed):
         random.seed(seed)
         for y in range(0, self.arraySize):
             for x in range(0, self.arraySize):
@@ -63,7 +63,7 @@ class worldMap():
 
         self.convertTypes()
 
-    def upNeutralDownGen(self):
+    def UpNeutralDownGen(self):
         dupMap = self.heightArray
         for y in range(0, self.arraySize):
             for x in range(0, self.arraySize):
@@ -109,7 +109,7 @@ class worldMap():
 
         self.heightArray = dupMap
 
-    def averageGen(self):
+    def AverageGen(self):
         dupMap = self.heightArray
         for y in range(0, self.arraySize):
             for x in range(0, self.arraySize):        
@@ -143,5 +143,5 @@ class worldMap():
                 dupMap[x][y] = total / count
         self.heightArray = dupMap
 
-    def clamp(self, val, low, high):
+    def Clamp(self, val, low, high):
         return low if val < low else high if val > high else val
