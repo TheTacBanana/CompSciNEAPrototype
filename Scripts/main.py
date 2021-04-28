@@ -1,11 +1,11 @@
 #Imports
 import pygame, random, json, os
 from datetime import datetime
-import worldClass, agentClass
+import worldClass, agentClass, mathLib
 
 #Variables
-simSize = 128
-gridSize = 4
+simSize = 256
+gridSize = 2
 simSeed = 420
 
 #World Functions
@@ -40,9 +40,18 @@ pygame.display.set_caption("Procedural Generation")
 
 agent = agentClass.agent()
 world = worldClass.worldMap(simSize)
-#RandomWorld()
-SetWorld(420)
+RandomWorld()
+#SetWorld(420)
 agent.updateSurroundings(world.typeArray)
+
+matrix = mathLib.Matrix(2, 1, [[9,9],[3,3]])
+matrix2 = mathLib.Matrix(2, 1, [[9,9],[3,3]])
+print(matrix)
+print(matrix2)
+matrix3 = mathLib.add(matrix, matrix2)
+print(matrix.val())
+print(matrix2.val())
+print(matrix3.val())
 
 #Main loop
 running = True
