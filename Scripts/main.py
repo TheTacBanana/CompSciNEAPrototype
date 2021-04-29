@@ -45,8 +45,9 @@ agent.UpdateSurroundings(world.typeArray)
 
 #Matrix Testing
 matrix = mathLib.Matrix([[1,2,3], [4,5,6], [7,8,9]])
-matrix2 = matrix.SubMatrixList([1], [2])
-print(matrix2.Val())
+#matrix2 = matrix.SubMatrixList([0], [1])
+#print(matrix2.Val())
+print(matrix.Determinant())
 
 #Main loop
 running = True

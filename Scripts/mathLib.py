@@ -67,11 +67,41 @@ class Matrix():
         return Vector(self.matrixArr)
 
     def Determinant(self):
-        if self.Dimensions()[0] == 2:
-            return self.matrixArr[0][0] * self.matrixArr[1][1] - self.matrixArr[0][1] * self.matrixArr[1][0]
-        else:
-            pass
-        return
+        dims = self.Dimensions()
+        print("Dim: {},{}".format(dims[0],dims[1]))
+        print(self.matrixArr)
+
+        if dims[1] <= 2:
+            print("test")
+            print(self.Val())
+            return (self.matrixArr[0][0] * self.matrixArr[1][1] - self.matrixArr[0][1] * self.matrixArr[1][0])
+
+        elif dims[1] != 2:
+            det = 0
+            subtract = False
+            tempMat = self.SubMatrixList([0],[])
+            
+            for i in range(0, dims[1]):
+                print(i)
+
+                print("Temp Mat:")
+                print(tempMat.Val())
+
+                print("Sub Mat:")
+                subMat = tempMat.SubMatrixList([],[i])
+                print(subMat.Val())
+                
+                if subtract == False:
+                    det += subMat.Determinant()
+                    subtract = True
+                else:
+                    det -= subMat.Determinant()
+                    subtract = False
+                print("Det:")
+                print(det)
+
+            return det
+        
 
     # Static Methods
     @staticmethod
