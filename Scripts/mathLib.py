@@ -32,19 +32,18 @@ class Matrix():
     def SubMatrixList(self, rowList, colList):
         subMat = Matrix(self.matrixArr)
         dims = self.Dimensions()
-        #print(dims)
-
+        rowList.sort(reverse=True)
+        colList.sort(reverse=True)
         deleteList = []
 
-        for y in range(0, dims[0]):
+        for y in range(dims[0] - 1, -1, -1):
             if y in rowList:
                 for x in range(dims[1] - 1, -1, -1):
                     deleteList.append((y,x))
 
-        for x in range(0, dims[1]):
+        for x in range(dims[1] - 1, -1, -1):
             if x in colList:
                 for y in range(dims[0] - 1, -1, -1):
-                    #print(y)
                     deleteList.append((y,x))
 
         for i in deleteList:
