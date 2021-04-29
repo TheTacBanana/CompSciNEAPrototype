@@ -43,10 +43,11 @@ world = worldClass.WorldMap(simSize)
 RandomWorld()
 agent.UpdateSurroundings(world.typeArray)
 
-#matrix = mathLib.Matrix([[1,2], [3,4]])
-#imatrix = mathLib.Matrix(3,3, True)
-#vector = mathLib.Vector([[3],[3]])
-#matrix3 = 
+#Matrix Testing
+matrix = mathLib.Matrix([[1,2], [3,4]])
+matrix2 = mathLib.Matrix([[1], [3]])
+vector = matrix2.ConvertToVector()
+print(vector.DotProduct(vector, vector))
 
 #Main loop
 running = True

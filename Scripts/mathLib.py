@@ -29,20 +29,35 @@ class Matrix():
             for x in range(0, len(self.matrixArr[0])):
                 self.matrixArr[y][x] = self.matrixArr[y][x] * multiplier
 
-    # Basic Matrix Operations
+    def SubMatrix(self, y1, y2, x1, x2):
+        subMat = Matrix(y2 - y1 + 1, x2 - x1 + 1)
+        for y in range(y1, y2 + 1):
+            for x in range(x1, x2 + 1):
+                subMat.matrixArr[y][x] = self.matrixArr[y][x]
+        return subMat
+
+    def ConvertToVector(self):
+        return Vector(self.matrixArr)
+
+    # Static Methods
     @staticmethod
-    def MatrixAdd(m1, m2): # Dont know how else i would make this more efficient lol
+    def MatrixAddSubtract(m1, m2, subtract = False): # Dont know how else i would make this more efficient lol
         m1Dims = m1.Dimensions()
         m2Dims = m2.Dimensions()
         if m1Dims[0] != m2Dims[0]:
             raise Exception("Matrices Row Order does not match")
         elif m1Dims[1] != m2Dims[1]:
             raise Exception("Matrices Column Order does not match")
+        elif type(m1) != type():
+            raise Exception("Types do not match, Convert Vector to Matrix or vice verse")
         else:
             newMat = Matrix(m1Dims[0], m1Dims[1])
             for y in range(0, m1Dims[0]):
                 for x in range(0, m1Dims[1]):
-                    newMat.matrixArr[y][x] = m1.Val()[y][x] + m2.Val()[y][x]
+                    if subtract:
+                        newMat.matrixArr[y][x] = m1.Val()[y][x] - m2.Val()[y][x]
+                    else:
+                        newMat.matrixArr[y][x] = m1.Val()[y][x] + m2.Val()[y][x]
             return newMat
 
     @staticmethod
@@ -78,6 +93,9 @@ class Vector(Matrix):
                 self.matrixArr = val
         else:
             self.matrixArr = [[0 for i in range(1)] for j in range(val)]
+
+    def ConvertToMatrix(self):
+        return Matrix(self.matrixArr)
 
     @staticmethod
     def DotProduct(v1,v2):
