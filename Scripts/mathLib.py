@@ -29,7 +29,35 @@ class Matrix():
             for x in range(0, len(self.matrixArr[0])):
                 self.matrixArr[y][x] = self.matrixArr[y][x] * multiplier
 
-    def SubMatrix(self, y1, y2, x1, x2):
+    def SubMatrixList(self, rowList, colList):
+        subMat = Matrix(self.matrixArr)
+        dims = self.Dimensions()
+        #print(dims)
+
+        deleteList = []
+
+        for y in range(0, dims[0]):
+            if y in rowList:
+                for x in range(dims[1] - 1, -1, -1):
+                    deleteList.append((y,x))
+
+        for x in range(0, dims[1]):
+            if x in colList:
+                for y in range(dims[0] - 1, -1, -1):
+                    #print(y)
+                    deleteList.append((y,x))
+
+        for i in deleteList:
+            try:
+                del subMat.matrixArr[i[0]][i[1]]
+            except:
+                pass
+
+        temp = [x for x in subMat.matrixArr if x != []]
+        subMat.matrixArr = temp
+        return subMat
+
+    def SubMatrixRange(self, y1, y2, x1, x2):
         subMat = Matrix(y2 - y1 + 1, x2 - x1 + 1)
         for y in range(y1, y2 + 1):
             for x in range(x1, x2 + 1):
@@ -38,6 +66,13 @@ class Matrix():
 
     def ConvertToVector(self):
         return Vector(self.matrixArr)
+
+    def Determinant(self):
+        if self.Dimensions()[0] == 2:
+            return self.matrixArr[0][0] * self.matrixArr[1][1] - self.matrixArr[0][1] * self.matrixArr[1][0]
+        else:
+            pass
+        return
 
     # Static Methods
     @staticmethod

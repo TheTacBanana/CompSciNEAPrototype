@@ -44,10 +44,9 @@ RandomWorld()
 agent.UpdateSurroundings(world.typeArray)
 
 #Matrix Testing
-matrix = mathLib.Matrix([[1,2], [3,4]])
-matrix2 = mathLib.Matrix([[1], [3]])
-vector = matrix2.ConvertToVector()
-print(vector.DotProduct(vector, vector))
+matrix = mathLib.Matrix([[1,2,3], [4,5,6], [7,8,9]])
+matrix2 = matrix.SubMatrixList([2], [2])
+print(matrix2.Val())
 
 #Main loop
 running = True
