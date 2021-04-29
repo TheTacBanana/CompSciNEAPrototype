@@ -13,7 +13,7 @@ class WorldMap():
         self.averaging = 0
         self.params = []
         self.thresholds = []
-        self.loadParameters("DefaultParameters.json")
+        self.LoadParameters("DefaultParameters.json")
 
     def LoadParameters(self, fname):
         file = open("Presets\\{}".format(fname), "r")
@@ -55,13 +55,13 @@ class WorldMap():
                 self.heightArray[x][y] = round(random.random(),2)
 
         for i in range(self.upNeutralDown):
-            self.upNeutralDownGen()
+            self.UpNeutralDownGen()
             #print("UNDGen")
         for i in range(self.averaging):
-            self.averageGen()
+            self.AverageGen()
             #print("averaging")       
 
-        self.convertTypes()
+        self.ConvertTypes()
 
     def UpNeutralDownGen(self):
         dupMap = self.heightArray
@@ -105,7 +105,7 @@ class WorldMap():
                     value = 0
 
                 dupMap[x][y] += value
-                dupMap[x][y] = self.clamp(dupMap[x][y], 0, 1)
+                dupMap[x][y] = self.Clamp(dupMap[x][y], 0, 1)
 
         self.heightArray = dupMap
 

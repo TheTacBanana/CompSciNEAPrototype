@@ -29,7 +29,7 @@ def RandomWorld():
 
 def SetWorld(seed):
   #print(datetime.now().time())
-  world.genMap(seed)
+  world.GenMap(seed)
   #print(datetime.now().time())
   DrawWorld()
   #print(datetime.now().time())
@@ -38,16 +38,17 @@ def SetWorld(seed):
 window = pygame.display.set_mode((simSize * gridSize, simSize * gridSize))
 pygame.display.set_caption("Procedural Generation")
 
-agent = agentClass.agent()
-world = worldClass.worldMap(simSize)
+agent = agentClass.Agent()
+world = worldClass.WorldMap(simSize)
 RandomWorld()
-#SetWorld(420)
-agent.updateSurroundings(world.typeArray)
+agent.UpdateSurroundings(world.typeArray)
 
-matrix = mathLib.Matrix(2, 2, [[1,2], [3,4]])
-print(matrix.val())
-matrix3 = mathLib.matrixMultiply(matrix, matrix)
-print(matrix3.val())
+matrix = mathLib.Matrix([[1,2], [3,4]])
+imatrix = mathLib.Matrix(2,2, True)
+print(matrix.Val())
+print(imatrix.Val())
+matrix3 = matrix.MatrixMultiply(matrix, matrix)
+print(matrix3.Val())
 
 
 #Main loop
