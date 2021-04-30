@@ -1,0 +1,29 @@
+Created a Matrix Class
+Spent way too long implementing an add and multiply function
+Matrice Multiplication has O(N^2.37)~ when the fastest algorithm is used, I however have not used this algorithm
+So the complexity of mine is more likely >3
+I used static classes so there doesnt need to be an instance of a matrix to call them
+
+Created a Vector subclass of matrix
+Its a specialised version of a matrix and works perfectly fine with my existing multiplication function
+Created a funtion to convert to matrix and vice versa
+
+Added another Class with static functions and constants for e and pi
+Will be useful in the future, and will get added to in the future
+
+Spent way too long implementing finding the determinant, took multiple hours of my time in order to finally get it right
+Its a pain in the ass recursive function with O(n!) complexity~
+Also uses finding the sub matrix alot, had alot of problems with this function but eventually got the complexity down and it actually working
+Having to compute N of N - 1 in order to find the answer
+
+Here are the results from calculating N Sized Determinants
+N: Time (Seconds)
+5: 0.01
+6: 0.04
+7: 0.43
+8: 4.57
+9: 39.42
+10: 387.56
+
+At this point i learned of a fast method for finding the determinant, which i may implement at a further date
+I will probably implement fast matrix multiplcation as well in the future

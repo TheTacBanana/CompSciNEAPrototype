@@ -24,9 +24,9 @@ def DrawWorld():
   # Draw Agent
   pygame.draw.rect(window, (255, 140, 0), ((agent.agentLocX * gridSize), (agent.agentLocY * gridSize), gridSize, gridSize))
 
+#World Gen Functions
 def RandomWorld():
   SetWorld(random.randint(0, 10000))
-
 def SetWorld(seed):
   #print(datetime.now().time())
   world.GenMap(seed)
@@ -42,9 +42,6 @@ agent = agentClass.Agent()
 world = worldClass.WorldMap(simSize)
 RandomWorld()
 agent.UpdateSurroundings(world.typeArray)
-
-#Matrix Testing
-
 
 #Main loop
 running = True

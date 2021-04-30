@@ -49,10 +49,7 @@ class Matrix():
                     yRowList.append(y)
                     continue
                 else:
-                    #print("y:{}".format(y - yoffset))
-                    #print("x:{}".format(x - xoffset))
                     newMat.matrixArr[y - yoffset][x - xoffset] = self.matrixArr[y][x]
-                    #print(newMat.Val())
             xoffset = 0
         return newMat
 
@@ -73,43 +70,21 @@ class Matrix():
     @staticmethod
     def Determinant(m):
         dims = m.Dimensions()
-        #print("Dim: {},{}".format(dims[0],dims[1]))
-        print(m.matrixArr)
-        
-
         if dims[1] <= 2:
-            #print("Base Case")
-            #print(m.Val())
             det = (m.matrixArr[0][0] * m.matrixArr[1][1]) - (m.matrixArr[0][1] * m.matrixArr[1][0])
-            #print(det)
             return (det)
-
         elif dims[1] != 2:
             det = 0
             subtract = False
-            
             tempMat = m.SubMatrixList([0],[])
-
             for i in range(0, dims[1]):
                 subMat = None
-                #print(i)
-
-                #print("Temp Mat:")
-                #print(tempMat.Val())
-
-                #print("Sub Mat:")
                 subMat = m.SubMatrixList([0],[i])
-                #print(subMat.Val())
-                
                 if subtract == False:
                     det += m.matrixArr[0][i] * Matrix.Determinant(subMat)
-                    #print("Det:")
-                    #print(det)
                     subtract = True
                 elif subtract == True:
                     det -= m.matrixArr[0][i] * Matrix.Determinant(subMat)
-                    #print("Det:")
-                    #print(det)
                     subtract = False
             return det
 
@@ -194,7 +169,6 @@ class Vector(Matrix):
             for i in range(v1.Dimensions()[0]):
                 total += v1.Val()[i][0] * v2.Val()[i][0]
             return total
-
 
 class GraphStuff():
     # Constants
