@@ -1,11 +1,11 @@
 #Imports
-import pygame, random, json, os
+import pygame, random, json, os, time
 from datetime import datetime
 import worldClass, agentClass, mathLib
 
 #Variables
-simSize = 256
-gridSize = 2
+simSize = 128
+gridSize = 4
 simSeed = 420
 
 #World Functions
@@ -44,10 +44,7 @@ RandomWorld()
 agent.UpdateSurroundings(world.typeArray)
 
 #Matrix Testing
-matrix = mathLib.Matrix([[1,2,3], [4,5,6], [7,8,9]])
-#matrix2 = matrix.SubMatrixList([0], [1])
-#print(matrix2.Val())
-print(matrix.Determinant())
+
 
 #Main loop
 running = True
@@ -62,19 +59,19 @@ while running == True:
         pygame.image.save(window,"DevelopmentScreenshots\\screenshot{}.png".format(len(next(os.walk("DevelopmentScreenshots"))[2])))
       elif event.key == pygame.K_w:
         agent.Move(0)
-        agent.updateSurroundings(world.typeArray)
+        agent.UpdateSurroundings(world.typeArray)
         DrawWorld()
       elif event.key == pygame.K_d:
         agent.Move(1)
-        agent.updateSurroundings(world.typeArray)
+        agent.UpdateSurroundings(world.typeArray)
         DrawWorld()
       elif event.key == pygame.K_s:
         agent.Move(2)
-        agent.updateSurroundings(world.typeArray)
+        agent.UpdateSurroundings(world.typeArray)
         DrawWorld()
       elif event.key == pygame.K_a:
         agent.Move(3)
-        agent.updateSurroundings(world.typeArray)
+        agent.UpdateSurroundings(world.typeArray)
         DrawWorld()
 
   pygame.display.update()

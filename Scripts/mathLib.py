@@ -1,4 +1,4 @@
-import math
+import math, random
 class Matrix():
     def __init__ (self, Values, cols = 0, identity = False):
         if type(Values) == list: # Predefined Values
@@ -30,31 +30,32 @@ class Matrix():
                 self.matrixArr[y][x] = self.matrixArr[y][x] * multiplier
 
     def SubMatrixList(self, rowList, colList):
-        subMat = Matrix(self.matrixArr)
-        dims = self.Dimensions()
-        rowList.sort(reverse=True)
-        colList.sort(reverse=True)
-        deleteList = []
+        newMat = Matrix(self.Dimensions()[0] - len(rowList),self.Dimensions()[1] - len(colList))
+        xoffset = 0
+        yoffset = 0
+        yRowList = []
 
-        for y in range(dims[0] - 1, -1, -1):
-            if y in rowList:
-                for x in range(dims[1] - 1, -1, -1):
-                    deleteList.append((y,x))
+        for y in range(0, self.Dimensions()[0]):
+            for x in range(0, self.Dimensions()[1]):
+                if x in colList and y in rowList:
+                    xoffset += 1
+                    yoffset += 1
+                    continue
+                elif x in colList:
+                    xoffset += 1
+                    continue
+                elif y in rowList and y not in yRowList:
+                    yoffset += 1
+                    yRowList.append(y)
+                    continue
+                else:
+                    #print("y:{}".format(y - yoffset))
+                    #print("x:{}".format(x - xoffset))
+                    newMat.matrixArr[y - yoffset][x - xoffset] = self.matrixArr[y][x]
+                    #print(newMat.Val())
+            xoffset = 0
+        return newMat
 
-        for x in range(dims[1] - 1, -1, -1):
-            if x in colList:
-                for y in range(dims[0] - 1, -1, -1):
-                    deleteList.append((y,x))
-
-        for i in deleteList:
-            try:
-                del subMat.matrixArr[i[0]][i[1]]
-            except:
-                pass
-
-        temp = [x for x in subMat.matrixArr if x != []]
-        subMat.matrixArr = temp
-        return subMat
 
     def SubMatrixRange(self, y1, y2, x1, x2):
         subMat = Matrix(y2 - y1 + 1, x2 - x1 + 1)
@@ -63,45 +64,68 @@ class Matrix():
                 subMat.matrixArr[y][x] = self.matrixArr[y][x]
         return subMat
 
+    def RandomVal(self):
+        self.matrixArr = [[random.randint(1, 100) for i in range(self.Dimensions()[1])] for j in range(self.Dimensions()[0])]
+
     def ConvertToVector(self):
         return Vector(self.matrixArr)
 
-    def Determinant(self):
-        dims = self.Dimensions()
-        print("Dim: {},{}".format(dims[0],dims[1]))
-        print(self.matrixArr)
+    @staticmethod
+    def Determinant(m):
+        dims = m.Dimensions()
+        #print("Dim: {},{}".format(dims[0],dims[1]))
+        print(m.matrixArr)
+        
 
         if dims[1] <= 2:
-            print("test")
-            print(self.Val())
-            return (self.matrixArr[0][0] * self.matrixArr[1][1] - self.matrixArr[0][1] * self.matrixArr[1][0])
+            #print("Base Case")
+            #print(m.Val())
+            det = (m.matrixArr[0][0] * m.matrixArr[1][1]) - (m.matrixArr[0][1] * m.matrixArr[1][0])
+            #print(det)
+            return (det)
 
         elif dims[1] != 2:
             det = 0
             subtract = False
-            tempMat = self.SubMatrixList([0],[])
             
+            tempMat = m.SubMatrixList([0],[])
+
             for i in range(0, dims[1]):
-                print(i)
+                subMat = None
+                #print(i)
 
-                print("Temp Mat:")
-                print(tempMat.Val())
+                #print("Temp Mat:")
+                #print(tempMat.Val())
 
-                print("Sub Mat:")
-                subMat = tempMat.SubMatrixList([],[i])
-                print(subMat.Val())
+                #print("Sub Mat:")
+                subMat = m.SubMatrixList([0],[i])
+                #print(subMat.Val())
                 
                 if subtract == False:
-                    det += subMat.Determinant()
+                    det += m.matrixArr[0][i] * Matrix.Determinant(subMat)
+                    #print("Det:")
+                    #print(det)
                     subtract = True
-                else:
-                    det -= subMat.Determinant()
+                elif subtract == True:
+                    det -= m.matrixArr[0][i] * Matrix.Determinant(subMat)
+                    #print("Det:")
+                    #print(det)
                     subtract = False
-                print("Det:")
-                print(det)
-
             return det
-        
+
+    def det(m):
+        top_length = len(m[0])
+        height = top_length - 1
+        submats = []
+
+        for i in range(0, top_length):
+            submat = [[] for i in range(height)]
+            for j in range(0, top_length):
+                if i != j:
+                    for k in range(height):
+                        submat[k].append(m[k+1][j])
+            submats.append(submat)
+        return submats
 
     # Static Methods
     @staticmethod
